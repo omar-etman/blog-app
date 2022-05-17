@@ -1,60 +1,28 @@
-import React from "react";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ReadMore from "./components/ReadMore";
-import HomePage from "./components/HomePage";
-import PostsBase from "./components/PostsBase";
+import "./App.css";
+import Navigation from "./Components/Navigation";
+import Posts from "./Components/Posts";
+import PostDetails from "./Components/PostDetails"
+import Box from "@mui/material/Box";
+import { grey } from "@mui/material/colors";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
-import RappBar from './components/RappBar'
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "./Actions/PostActions";
 
 function App() {
-  const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("notes");
-    const initialValue = JSON.parse(saved);
-
-    return initialValue || [];
-  });
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
-
-  function addNote(newNote) {
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
-  }
-
-  function deleteNote(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem) => {
-        return noteItem.id !== id;
-      });
-    });
-  }
+    dispatch(getPosts());
+  }, []);
+  const state = useSelector(state => state.posts)
   return (
-    <Router>
-      
-  <RappBar notes={notes}
-        setNotes={setNotes}
-        onAdd={addNote}/>
+    <Box sx={{ bgcolor: grey[200]}}>
+      <Navigation />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              notes={notes}
-              setNotes={setNotes}
-              onAdd={addNote}
-              onDelete={deleteNote}
-            />
-          }
-        />
-        <Route path="/PostsBase" element={<PostsBase />} />
-        <Route path="/posts/:id" element={<ReadMore />} />
+        <Route path="/" element={<Posts />}/>
+        <Route path="/:id" element={<PostDetails />}/>
       </Routes>
-    </Router>
+    </Box>
   );
 }
 
