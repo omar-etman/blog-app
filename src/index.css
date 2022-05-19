@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.reddit-logo-mrgn {
+  margin-right: 0.8rem;
+}
