@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../Images/logo.png";
+import logo from "../Images/reddit-1-logo-png-transparent.png";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -53,7 +53,7 @@ const Navigation = () => {
         <Toolbar sx={{ justifyContent: "space-between", flexGrow: 1 }}>
           <Link to={"/"}>
             {" "}
-            <img src={logo} />
+            <img className = 'logo' src={logo} />
           </Link>
           <Search sx={{ border: 1 }}>
             <SearchIconWrapper>

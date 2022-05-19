@@ -7,14 +7,16 @@ import { grey } from "@mui/material/colors";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from "./Actions/PostActions";
+import { getPosts } from "./API/index";
+import {setPosts} from "./redux/reducers"
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPosts());
-  }, []);
   const state = useSelector(state => state.posts)
+  useEffect(() => {
+    const postsList = getPosts()
+    dispatch(setPosts(postsList));
+  }, [state]);
   return (
     <Box sx={{ bgcolor: grey[200]}}>
       <Navigation />

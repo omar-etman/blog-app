@@ -12,6 +12,8 @@ code {
     monospace;
 }
 
-.reddit-logo-mrgn {
+
+.logo {
+  width: 7rem;
   margin-right: 0.8rem;
 }
